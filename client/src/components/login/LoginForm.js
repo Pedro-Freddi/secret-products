@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import mailIcon from "../../icons/mail.png";
 import keyIcon from "../../icons/key.png";
 import LoadingSpinner from "../utils/LoadingSpinner.js";
@@ -7,10 +8,13 @@ import styles from "./LoginForm.module.css";
 
 const LoginForm = () => {
 
-  const [ error, setError ] = useState(null);
-  const [ isLoading, setIsLoading ] = useState(null);
+  const navigate = useNavigate();
 
-  // Local state form variables
+  // Component state variables
+  const [ error, setError ] = useState(null);
+  const [ isLoading, setIsLoading ] = useState(false);
+
+  // Form variables
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -29,6 +33,35 @@ const LoginForm = () => {
   // Submit event handler
   const handleSubmit = (event) => {
     event.preventDefault();
+    setIsLoading(true);
+    setError(null);
+    fetch("api/users/login", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify({ email, password })
+    })
+    .then(response => response.json())
+    .then(data => {
+      setIsLoading(false);
+
+      // Set error message if present
+      if (data.message) {
+        setError(data.message);
+        return;
+      }
+
+      // Store JWT token in local storage
+      localStorage.setItem("token", data.token);
+
+      setError(null);
+      navigate("/");
+    })
+    .catch(err => {
+      setIsLoading(false);
+      setError(err.message);
+    });
   };
 
   return (

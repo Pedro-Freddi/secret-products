@@ -17,16 +17,6 @@
   font-weight: 600;
 }
 
-.successMessage {
-  font-size: 20px;
-  font-weight: 600;
-  margin: 20px 0;
-}
-
-.redirectMessage {
-  margin: 10px;
-}
-
 .registerMessage {
   margin: 0;
 }
@@ -53,15 +43,6 @@
   
   .title {
     font-size: 1.25rem;
-  }
-  
-  .successMessage {
-    font-size: 1.15rem;
-    margin: 10px 0;
-  }
-  
-  .redirectMessage {
-    font-size: 0.90rem;
   }
   
   .registerMessage {
