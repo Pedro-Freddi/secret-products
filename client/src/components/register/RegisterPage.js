@@ -8,7 +8,7 @@ const RegisterPage = () => {
 
   const navigate = useNavigate();
 
-  // Local state variable to track a successful registration
+  // State variable to track a successful registration
   const [ registrationSuccess, setRegistrationSuccess ] = useState(false);
 
   // On registration success, render a confirmation message and redirect
@@ -16,7 +16,7 @@ const RegisterPage = () => {
   useEffect(() => {
     if (registrationSuccess) {
       const timerId = setTimeout(() => {
-        navigate("/login", { replace: true });
+        navigate("/login");
       }, 3000);
       return () => clearTimeout(timerId);
     }

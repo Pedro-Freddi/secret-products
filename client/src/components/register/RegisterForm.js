@@ -8,8 +8,8 @@ import styles from "./RegisterForm.module.css";
 
 const RegisterForm = ({ onRegistrationSuccess }) => {
 
-  // Error and status local state variables
-  const [ status, setStatus ] = useState("idle");
+  // Component state variables
+  const [ isLoading, setIsLoading ] = useState(false);
   const [ error, setError ] = useState(null);
   
   // Form variables
@@ -36,6 +36,30 @@ const RegisterForm = ({ onRegistrationSuccess }) => {
   // Submit handler
   const handleSubmit = (event) => {
     event.preventDefault();
+    setError(null);
+    setIsLoading(true);
+    fetch("/api/users", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify({ name, email, password, confirmPassword })
+    })
+    .then(response => {
+      if (response.status === 201) {
+        onRegistrationSuccess(true);
+        return;
+      }
+      return response.json();
+    })
+    .then(data => {
+      setIsLoading(false);
+      if (data.message) setError(data.message);
+    })
+    .catch(err => {
+      setIsLoading(false);
+      setError(err.message);
+    })
   };
 
   return (
@@ -96,7 +120,7 @@ const RegisterForm = ({ onRegistrationSuccess }) => {
         minLength="8"
         maxLength="64"
       />
-      { status === "loading" ?
+      { isLoading ?
         <LoadingSpinner size="8px" />
         :
         <input type="submit" className={styles.button} value="Submit" /> }
