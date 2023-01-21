@@ -8,7 +8,7 @@ const apiRouter = require("./api/index.js");
 
 // Sync database
 const db = require("./models/index.js");
-db.sequelize.sync({ force: true })
+db.sequelize.sync()
   .then(() => {
     console.log("Database synced successfully");
   })

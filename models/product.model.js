@@ -1,5 +1,10 @@
 module.exports = (sequelize, DataTypes) => {
   const Product = sequelize.define("Product", {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -11,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       unique: true
     },
     price: {
-      type: DataTypes.DECIMAL(2),
+      type: DataTypes.DECIMAL,
       allowNull: false
     },
     image: {
@@ -19,7 +24,8 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     }
   }, {
-    tableName: "Products"
+    tableName: "Products",
+    timestamps: false
   }
   );
   
