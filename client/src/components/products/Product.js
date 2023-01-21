@@ -5,11 +5,11 @@ const Product = ({ product }) => {
   return (
     <article className={styles.container}>
         <img 
-        src={`${process.env.REACT_APP_API_HOST_URL}${product.image}`}
-        alt={product.displayName}
+        src={product.image}
+        alt={product.display_name}
         className={styles.image}
         />
-        <h3 className={styles.title}>{product.displayName}</h3>
+        <h3 className={styles.title}>{product.display_name}</h3>
       <p className={styles.price}>${product.price}</p>
     </article>
   );
