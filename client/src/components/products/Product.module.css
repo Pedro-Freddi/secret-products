@@ -1,0 +1,51 @@
+.container {
+  width: 200px;
+  min-height: 340px;
+  margin: 20px 10px;
+  border: 1px solid #808080;
+  border-radius: 10px;
+  background-color: #FFFFFF;
+}
+
+.image {
+  width: 200px;
+  height: 200px;
+  border-radius: 10px 10px 0 0;
+}
+
+.title {
+  font-weight: 400;
+  text-align: center;
+  margin: 5px;
+  transition: font-weight 0.15s ease-in-out;
+}
+
+.title:hover {
+  font-weight: 600;
+}
+
+.title:active {
+  font-weight: 400;
+  transition: none;
+}
+
+.price {
+  text-align: center;
+  margin: 5px;
+}
+
+@media screen and (max-width: 680px) {
+  .title {
+    font-size: 1.10rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    min-height: 330px;
+  }
+
+  .container p {
+    font-size: 0.90rem;
+  }
+}
