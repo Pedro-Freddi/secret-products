@@ -1,5 +1,6 @@
 const db = require("../models/index.js");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 const User = db.users;
 
 // Create and save a new user
@@ -18,8 +19,11 @@ exports.create = async (req, res) => {
     return;
   }
 
+  // Hash password before storing
+  const hashedPassword = await bcrypt.hash(password, 10);
+
   // Create the new user
-  User.create({ name, email, password })
+  User.create({ name, email, password: hashedPassword })
   .then(data => {
     res.status(201).json({ "message": "User created successfully." });
     return;
@@ -34,7 +38,7 @@ exports.create = async (req, res) => {
 };
 
 // Login an user and return a JWT Token
-exports.login = (req, res) => {
+exports.login = async (req, res) => {
   const { email, password } = req.body;
 
   // Check for missing fields in request body
@@ -44,7 +48,7 @@ exports.login = (req, res) => {
   }
 
   User.findAll({ where: { email: email } })
-  .then(results => {
+  .then(async results => {
     // Send a 401 error if there is no user with the provided e-mail
     if (results.length === 0) {
       res.status(401).json({ "message": "Invalid e-mail or password" });
@@ -52,7 +56,9 @@ exports.login = (req, res) => {
     }
 
     // Send a 401 error if passwords don't match
-    if (results[0].password !== password) {
+    const passwordMatch = await bcrypt.compare(password, results[0].password);
+
+    if (!passwordMatch) {
       res.status(401).json({ "message": "Invalid e-mail or password" });
       return;
     }
