@@ -1,9 +1,9 @@
 const express = require("express");
+const users = require("../../controllers/user.controller.js");
 
 const router = express.Router();
 
-router.get("/", (req, res, next) => {
-  res.status(200).send("Users Route");
-});
+router.post("/", users.create);
+router.post("/login", users.login);
 
 module.exports = router;

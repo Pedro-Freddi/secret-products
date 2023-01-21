@@ -1,9 +1,9 @@
 const express = require("express");
+const authenticateToken = require("../../middleware/authenticateToken.js");
+const products = require("../../controllers/product.controller.js");
 
 const router = express.Router();
 
-router.get("/", (req, res, next) => {
-  res.status(200).send("Products Route");
-});
+router.get("/", authenticateToken, products.findAll);
 
 module.exports = router;
