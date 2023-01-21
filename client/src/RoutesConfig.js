@@ -1,7 +1,6 @@
 import React from "react";
 import { Routes, Route } from 'react-router-dom';
 import HomePage from "./components/homepage/HomePage.js";
-import Product from "./components/products/Product.js";
 import LoginPage from "./components/login/LoginPage.js";
 import RegisterPage from "./components/register/RegisterPage.js";
 import NotFound from "./components/not-found/NotFound.js";
@@ -9,9 +8,7 @@ import NotFound from "./components/not-found/NotFound.js";
 const RoutesConfig = () => {
   return (
     <Routes>
-      <Route path="/" element={<HomePage />}>
-        <Route index element={<Product />} />
-      </Route>
+      <Route path="/" element={<HomePage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="*" element={<NotFound />} />
