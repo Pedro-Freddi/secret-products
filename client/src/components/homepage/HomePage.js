@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Product from "../products/Product.js";
 import LoadingSpinner from "../utils/LoadingSpinner.js";
+import styles from "./Homepage.module.css";
 
 const HomePage = () => {
 
@@ -56,15 +57,32 @@ const HomePage = () => {
     });
   }, []);
 
+  // Logout handler
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
+
   return (
-    <>
+    <section className={styles.container}>
       { isLoading && <LoadingSpinner size="8px" /> }
       { error && <p>{error}</p> }
-      { products && products.map(product => {
-          return <Product product={product} key={product.id} />;
-          }) 
+      <section className={styles.productsContainer}>
+        { products && products.map(product => {
+            return <Product product={product} key={product.id} />;
+            }) 
+        }
+      </section>
+      {
+        products && <button
+                     name="logout"
+                     className={styles.button} 
+                     value="Logout" 
+                     onClick={handleLogout}>
+                      Logout
+                     </button>
       }
-    </>
+    </section>
   );
 };
 
