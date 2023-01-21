@@ -18,6 +18,7 @@ db.sequelize.sync()
 
 // Initialize app
 const app = express();
+app.disable("x-powered-by"); // Remove Express fingerprinting HTTP header
 
 // Serve static files from the client's build folder
 app.use(express.static(path.join(__dirname, "client", "build")));
