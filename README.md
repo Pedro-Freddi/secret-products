@@ -67,7 +67,7 @@ DATABASE_URL=
 JWT_SECRET=
 ```
 
-5. Run [db-setup.sql](./docs/scripts/db-setup.sql) script in PostgreSQL client to create set up the database.
+5. Run [db-setup.sql](./docs/scripts/db-setup.sql) script in PostgreSQL client to set up the database.
 
 6. Run the application so that Sequelize creates the tables in the database.
 ```
