@@ -8,8 +8,6 @@ Highlights:
 * Thorough input validation and detailed error messages to inform users.
 * JWT based authentication.
 
-A deployed version of this application can be found [here](https://secret-products-pdafr.rj.r.appspot.com/).
-
 ## Technologies
 
 * Express v4.18.2
@@ -33,9 +31,9 @@ Other libraries that were used:
 
 Scripts for database setup and seeding can be found [here](./docs/scripts).
 
-## Running Locally
+## Running the Application Locally
 
-Requirements: Node.js v16+ and PostgreSQL v14 must be installed locally.
+Requirements: Node.js v16+ and PostgreSQL v14 must be installed on your machine.
 
 1. Clone this repository:
 ```
@@ -55,11 +53,8 @@ npm install
 npm run build
 ```
 
-4. Add environments variables values in `/config/EXAMPLE.env` and rename the file to `.env`:
+4. Add missing environments variables values in `/config/EXAMPLE.env` and rename the file to `.env`:
 ```
-# The port that the server will listen on
-PORT=
-
 # Database URL connection string (format: postgres://user:password@host/database)
 DATABASE_URL=
 
@@ -76,7 +71,7 @@ npm start
 
 7. Run [db-seed.sql](./docs/scripts/db-seed.sql) script in PostgreSQL client to populate products table.
 
-8. Run the application again and navigate to `http://localhost:{PORT you set in .env}/`.
+8. Run the application again and navigate to `http://localhost:8000` on your browser.
 ```
 npm start
 ```
